@@ -36,11 +36,11 @@ const ShoeCard = ({
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
-          {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
-          {variant === 'new-release' && (
-            <NewFlag>Just released!</NewFlag>
-          )}
         </ImageWrapper>
+        {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
+        {variant === 'new-release' && (
+          <NewFlag>Just released!</NewFlag>
+        )}
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
@@ -73,15 +73,37 @@ const Link = styled.a`
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  position: relative;
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
+  border-radius: 16px 16px 4px 4px;
+  overflow: hidden;
 `;
 
 const Image = styled.img`
   width: 100%;
-  border-radius: 16px 16px 4px 4px;
+  display: block;
+  
+
+  ${Link}:hover &, ${Link}:focus & {
+    filter: contrast(110%);
+  }
+  
+  /* hover: hover is not my own */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    will-change: transform;
+    transform-origin: center 90%; /* original answer */
+    transform-origin: center 75%;
+    transition: transform 400ms, filter 300ms;
+
+    ${Link}:hover &, ${Link}:focus & {
+      transform: scale(1.1);
+      transition-duration: 100ms, 50ms;
+    }
+  }
 `;
 
 const Row = styled.div`
@@ -121,10 +143,21 @@ const Flag = styled.div`
   font-weight: ${WEIGHTS.bold};
   color: var(--color-white);
   border-radius: 2px;
+  will-change: transform;
+  transition: transform 400ms ease;
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${Link}:hover &, ${Link}:focus & {
+      transform: translateY(-4px);
+      transition-duration: 100ms;
+    }
+  }
 `;
 
 const SaleFlag = styled(Flag)`
   background-color: var(--color-primary);
+
+
 `;
 const NewFlag = styled(Flag)`
   background-color: var(--color-secondary);
