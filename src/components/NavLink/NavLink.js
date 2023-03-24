@@ -25,7 +25,7 @@ const Wrapper = styled.a`
   display: block;
   position: relative;
   font-size: 1.125rem;
-  /* font-size: 5rem; */
+  font-size: 5rem;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color);
@@ -63,7 +63,7 @@ const Bottom = styled.div`
       height: 3px;
       background-color: var(--color);
       @media (prefers-reduced-motion: no-preference) {
-        animation: slide-right 1000ms forwards linear 1, slide-half 1500ms 2000ms forwards ease 1;
+        animation: slide-right 1000ms forwards linear 1, slide-half 1450ms 1850ms forwards ease 1;
       }
     }
 
