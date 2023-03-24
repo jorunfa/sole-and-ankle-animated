@@ -21,6 +21,7 @@ const NavLink = ({ children, ...delegated }) => {
 
 const Wrapper = styled.a`
   --color: var(--color-gray-900);
+  border-radius: 1px;
   display: block;
   position: relative;
   font-size: 1.125rem;
@@ -61,7 +62,9 @@ const Bottom = styled.div`
       width: 100%;
       height: 3px;
       background-color: var(--color);
-      animation: slide-right 1000ms forwards linear 1, slide-half 1500ms 2000ms forwards ease 1;
+      @media (prefers-reduced-motion: no-preference) {
+        animation: slide-right 1000ms forwards linear 1, slide-half 1500ms 2000ms forwards ease 1;
+      }
     }
 
     @keyframes slide-right {
@@ -88,25 +91,27 @@ const Right = styled.div`
   position: relative;
   width: 3px;
 
-  ${Wrapper}:hover &,
-  ${Wrapper}:focus & {
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 3px;
-      height: 200%;
-      background-color: var(--color);
-      animation: slide-up 1000ms 500ms both linear 1;
-    }
-
-    @keyframes slide-up {
-      from {
-        transform: translateY(calc(100% + 3px));
+  @media (prefers-reduced-motion: no-preference) {
+    ${Wrapper}:hover &,
+    ${Wrapper}:focus & {
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 3px;
+        height: 200%;
+        background-color: var(--color);
+        animation: slide-up 1000ms 500ms both linear 1;
       }
-      to {
-        transform: translateY(calc(-100% + -2px));
+
+      @keyframes slide-up {
+        from {
+          transform: translateY(calc(100% + 3px));
+        }
+        to {
+          transform: translateY(calc(-100% + -2px));
+        }
       }
     }
   }
@@ -116,25 +121,27 @@ const Top = styled.div`
   position: relative;
   height: 3px;
 
-  ${Wrapper}:hover &,
-  ${Wrapper}:focus & {
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background-color: var(--color);
-      animation: slide-left 1500ms 750ms both linear 1;
-    }
-
-    @keyframes slide-left {
-      from {
-        transform: translateX(calc(100% + 1px));
+  @media (prefers-reduced-motion: no-preference) {
+    ${Wrapper}:hover &,
+    ${Wrapper}:focus & {
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: var(--color);
+        animation: slide-left 1500ms 750ms both linear 1;
       }
-      to {
-        transform: translateX(calc(-100% + -1px));
+
+      @keyframes slide-left {
+        from {
+          transform: translateX(calc(100% + 1px));
+        }
+        to {
+          transform: translateX(calc(-100% + -1px));
+        }
       }
     }
   }
@@ -144,25 +151,27 @@ const Left = styled.div`
   position: relative;
   width: 3px;
 
-  ${Wrapper}:hover &,
-  ${Wrapper}:focus & {
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 3px;
-      height: 200%;
-      background-color: var(--color);
-      animation: slide-down 1500ms 1150ms both linear 1;
-    }
-
-    @keyframes slide-down {
-      from {
-        transform: translateY(calc(-100% + 1px));
+  @media (prefers-reduced-motion: no-preference) {
+    ${Wrapper}:hover &,
+    ${Wrapper}:focus & {
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 3px;
+        height: 200%;
+        background-color: var(--color);
+        animation: slide-down 1500ms 1150ms both linear 1;
       }
-      to {
-        transform: translateY(calc(100% + 3px));
+
+      @keyframes slide-down {
+        from {
+          transform: translateY(calc(-100% + 1px));
+        }
+        to {
+          transform: translateY(calc(100% + 3px));
+        }
       }
     }
   }
