@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 
 import { QUERIES, WEIGHTS } from '../../constants';
@@ -12,6 +12,7 @@ import VisuallyHidden from '../VisuallyHidden';
 const MobileMenu = ({ isOpen, onDismiss }) => {
   return (
     <Overlay isOpen={isOpen} onDismiss={onDismiss}>
+      <Background></Background>
       <Content aria-label="Menu">
         <CloseButton onClick={onDismiss}>
           <Icon id="close" />
@@ -36,24 +37,70 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
   );
 };
 
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
+
 const Overlay = styled(DialogOverlay)`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--color-backdrop);
   display: flex;
   justify-content: flex-end;
+
+`;
+
+const Background = styled.div`
+  background: var(--color-backdrop);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: ${fadeIn} 1000ms ease forwards;
+`;
+
+const slideIn = keyframes`
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+`;
+
+const gradualTransparency = keyframes`
+  0%  { transform: translateY(-200vh); }
+  100% { transform: translateY(0); }
 `;
 
 const Content = styled(DialogContent)`
+  position: relative;
   background: white;
   width: 300px;
   height: 100%;
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
+  animation: ${slideIn} 400ms 200ms both;
+  animation-timing-function: cubic-bezier(0.46, 0.03, 0.35, 1.09);
+
+  & > * {
+    /* animation: ${fadeIn} 400ms 500ms ease both; */
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    height: 300vh;
+
+    background: linear-gradient(transparent, transparent 33.3%, white 66.6%, white);
+    animation: ${gradualTransparency} 2200ms 100ms ease-out both;
+  }
 `;
 
 const CloseButton = styled(UnstyledButton)`
