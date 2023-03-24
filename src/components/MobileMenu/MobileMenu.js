@@ -60,7 +60,9 @@ const Background = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  animation: ${fadeIn} 1000ms ease forwards;
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${fadeIn} 1000ms ease forwards;
+  }
 `;
 
 const slideIn = keyframes`
@@ -81,11 +83,8 @@ const Content = styled(DialogContent)`
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
-  animation: ${slideIn} 400ms 200ms both;
-  animation-timing-function: cubic-bezier(0.46, 0.03, 0.35, 1.09);
-
-  & > * {
-    /* animation: ${fadeIn} 400ms 500ms ease both; */
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${slideIn} 400ms 200ms cubic-bezier(0.46, 0.03, 0.35, 1.09) both;
   }
 
   &::after {
@@ -98,8 +97,10 @@ const Content = styled(DialogContent)`
     pointer-events: none;
     height: 300vh;
 
-    background: linear-gradient(transparent, transparent 33.3%, white 66.6%, white);
-    animation: ${gradualTransparency} 2200ms 100ms ease-out both;
+    @media (prefers-reduced-motion: no-preference) {
+      background: linear-gradient(transparent, transparent 33.3%, white 66.6%, white);
+      animation: ${gradualTransparency} 2200ms 100ms ease-out both;
+    }
   }
 `;
 
