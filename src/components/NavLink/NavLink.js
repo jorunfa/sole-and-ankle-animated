@@ -25,7 +25,7 @@ const Wrapper = styled.a`
   display: block;
   position: relative;
   font-size: 1.125rem;
-  font-size: 5rem;
+  /* font-size: 5rem; */
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color);
